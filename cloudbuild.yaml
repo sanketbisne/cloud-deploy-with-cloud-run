@@ -1,0 +1,28 @@
+# Build and tag using commit sha
+
+steps:
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '.', '-t', 'gcr.io/$PROJECT_ID/sanket-cloud-deploy-run:latest', '-f', 'Dockerfile']
+
+
+# Push the container image
+
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/sanket-cloud-deploy-run:latest']
+# Create release in Google Cloud Deploy
+
+
+- name: gcr.io/google.com/cloudsdktool/cloud-sdk
+  entrypoint: gcloud
+  args:
+    [
+      "deploy", "releases", "create", "rel1",
+      "--delivery-pipeline", "sanket-cloud-run-pipeline",
+      "--region", "us-central1",
+      "--annotations", "commitId=${REVISION_ID}",
+      "--images", "myapp=gcr.io/$PROJECT_ID/sanket-cloud-deploy-run:latest"
+    ]
+
+

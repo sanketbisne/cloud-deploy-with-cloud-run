@@ -1,0 +1,15 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: dev
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/maxScale: "1"
+    spec:
+      containers:
+      - name: myapp
+        image: gcr.io/searce-playground-v1/sanket-cloud-deploy-run
+        ports:
+        - containerPort:  80

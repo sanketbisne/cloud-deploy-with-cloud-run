@@ -1,0 +1,22 @@
+apiVersion: skaffold/v3alpha1
+kind: Config
+metadata:
+  name: myapp
+build:
+  tagPolicy:
+    sha256: {}
+  artifacts:
+    - image: gcr.io/searce-playground-v1/sanket-cloud-deploy-run
+      docker:
+        dockerfile: Dockerfile
+  googleCloudBuild:
+    projectId: ${PROJECT_ID}
+deploy:
+  cloudrun: {}
+profiles:
+  - name: dev
+    manifests:
+      rawYaml:
+        - myapp-test.yaml
+
+
