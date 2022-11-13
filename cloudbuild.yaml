@@ -18,7 +18,7 @@ steps:
       "--delivery-pipeline", "sanket-cloud-run-pipeline",
       "--region", "us-central1",
       "--annotations", "commitId=${REVISION_ID}",
-      "--images", "myapp=gcr.io/$PROJECT_ID/sanket-cloud-deploy-run:latest"
+      "--images", "myapp=gcr.io/$PROJECT_ID/sanket-cloud-deploy-run:${COMMIT_SHA}"
     ]
 
 
