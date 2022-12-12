@@ -16,7 +16,7 @@ metadata:
  name: dev
 description: Cloud Run development svc
 run:
- location: projects/searce-playground-v1/locations/us-central1
+ location: projects/$PROJECT_ID/locations/us-central1
 
 
 
